@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>Prefes</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>
+    </script>
+</head>
+<body>
+    <div id="container">
+        <script type="text/javascript" src="swfobject.js"></script>
+        <div id="ytapiplayer">
+            You need Flash player 8+ and JavaScript enabled to view this video.
+        </div>
+
+        <script type="text/javascript">
+            var params = { allowScriptAccess: "always" };
+            var atts = { id: "myytplayer" };
+            swfobject.embedSWF("http://www.youtube.com/v/VIDEO_ID?enablejsapi=1&playerapiid=ytplayer", 
+                                "ytapiplayer", "425", "356", "8", null, null, params, atts);
+        </script>
+         <div class="item">
+             <%= @data %>
+        </div>
+    </div>
+</body>
+</html>
