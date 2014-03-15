@@ -4,29 +4,40 @@
 require 'sinatra'
 require 'sinatra/reloader'
 require 'open-uri'
-require 'json'
+#require 'json'
 require 'rexml/document'
 require 'rubygems'
 require 'google/api_client'
 require 'trollop'
 
+get '/' do
+end
+
 get '/:name' do
   song_array = []
 
-  #setlistからXMLを取得
-  song = REXML::Document.new(open("http://api.setlist.fm/rest/0.1/search/setlists?artistName=#{params[:name]}"))
-  song2 = REXML::Document.new(open("http://api.setlist.fm/rest/0.1/search/setlists?artistName=#{params[:name]}&p=2"))
+  begin
+    #setlistからXMLを取得
+    song = REXML::Document.new(open("http://api.setlist.fm/rest/0.1/search/setlists?artistName=#{params[:name]}"))
+    song2 = REXML::Document.new(open("http://api.setlist.fm/rest/0.1/search/setlists?artistName=#{params[:name]}&p=2"))
+    rescue OpenURI::HTTPError => ex
+      puts "Handle missing video here"
+  end
 
   #アーティストの最新ライブ動向
   #song.elements.each('setlists/setlist/sets/set') do |d|
   #end
 
   #setlistからXMLをパース
-  song.elements.each('setlists/setlist/sets/set/song') do |e|
-     song_array << e.attributes["name"]
-  end
-  song2.elements.each('setlists/setlist/sets/set/song') do |e|
-     song_array << e.attributes["name"]
+  begin
+    song.elements.each('setlists/setlist/sets/set/song') do |e|
+       song_array << e.attributes["name"]
+    end
+    song2.elements.each('setlists/setlist/sets/set/song') do |e|
+       song_array << e.attributes["name"]
+    end
+    rescue NoMethodError
+      puts 'NoMethod'
   end
 
   #配列中の曲の回数をカウント
@@ -52,7 +63,7 @@ get '/:name' do
   def main(search)
     opts = Trollop::options do
       opt :q, 'Search Term', :type => String, :default => search
-      opt :max_results, 'Max results', :type => :int, :default => 25
+      opt :max_results, 'Max results', :type => :int, :default => 1
     end
 
     client, youtube = get_service
@@ -67,13 +78,27 @@ get '/:name' do
         }
       )
 
-      p search_response.data.items[0]['id']['videoId']
+      return search_response.data.items[0]['id']['videoId']
 
     rescue Google::APIClient::TransmissionError => e
       puts e.result.body
     end
   end
-  @data = main('radiohead creep')
+
+  #曲のYouTubeIdを取得する
+  begin
+  topsong = "#{params[:name]} "+ count_sort[0][0]
+  @data = main(topsong)
+
+  count_sort.each do |s|
+    othersong = "#{params[:name]} "+ s[0]
+    s << main(othersong)
+    p s
+  end
+  rescue NoMethodError,Faraday::SSLError
+    puts 'NoMethod'
+  end
+  @setlist = count_sort
 
   erb :index
 end

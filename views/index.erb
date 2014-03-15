@@ -7,25 +7,22 @@
     <meta name="description" content="">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script>
-    </script>
+    <script type="text/javascript" src="js/swfobject.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
     <div id="container">
-        <script type="text/javascript" src="swfobject.js"></script>
         <div id="ytapiplayer">
             You need Flash player 8+ and JavaScript enabled to view this video.
         </div>
 
         <script type="text/javascript">
+            var youtubeUrl = 'http://www.youtube.com/v/<%= @data %>?enablejsapi=1&playerapiid=ytplayer';
             var params = { allowScriptAccess: "always" };
             var atts = { id: "myytplayer" };
-            swfobject.embedSWF("http://www.youtube.com/v/VIDEO_ID?enablejsapi=1&playerapiid=ytplayer", 
-                                "ytapiplayer", "425", "356", "8", null, null, params, atts);
+            var flashvars = {};
+            swfobject.embedSWF(youtubeUrl,"ytapiplayer", "425", "356", "8", null, flashvars, params, atts);
         </script>
-         <div class="item">
-             <%= @data %>
-        </div>
     </div>
-</body>
+    </body>
 </html>
