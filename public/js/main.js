@@ -8,7 +8,9 @@ function onYouTubePlayerReady(player){
 
 function onYouTubePlayerStateChange(state){
   if(state === 0){
-    console.log('video end');
+    //$('li').find('.current').next().addClass('current');
+
+   // document.getElementsByClassName('current')
   }
 
 };

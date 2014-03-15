@@ -17,12 +17,24 @@
         </div>
 
         <script type="text/javascript">
-            var youtubeUrl = 'http://www.youtube.com/v/<%= @data %>?enablejsapi=1&playerapiid=ytplayer';
+            var id = location.hash.substring(1);
+            $('li').find(id).addClass('current');//今日はここから。このcurrentクラスをどうやって、次の曲にもっていくのか。最初に呼び込まれた時は、どうやって最初のhashにアクセスさせるのか。
+            var youtubeUrl = 'http://www.youtube.com/v/'+ id +'?enablejsapi=1&playerapiid=ytplayer';
             var params = { allowScriptAccess: "always" };
             var atts = { id: "myytplayer" };
             var flashvars = {};
             swfobject.embedSWF(youtubeUrl,"ytapiplayer", "425", "356", "8", null, flashvars, params, atts);
+            console.log(youtubeUrl);
         </script>
+        <ul>
+            <% @setlist.each do |name, count,id|%>
+                <li id='<%= id %>'>
+                <a href='#<%= id %>' class='clearfix' data-id='<%= id %>' title='<%= name %>'>
+                    <span>link</span>
+                </a><%= count %>
+                </li>
+            <% end %>
+        </ul>
     </div>
     </body>
 </html>

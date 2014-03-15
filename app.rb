@@ -90,7 +90,7 @@ get '/:name' do
   topsong = "#{params[:name]} "+ count_sort[0][0]
   @data = main(topsong)
 
-  count_sort.each do |s|
+  count_sort[0..2].each do |s|
     othersong = "#{params[:name]} "+ s[0]
     s << main(othersong)
     p s
