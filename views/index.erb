@@ -16,17 +16,7 @@
             You need Flash player 8+ and JavaScript enabled to view this video.
         </div>
 
-        <script type="text/javascript">
-            var id = location.hash.substring(1);
-            $('li').find(id).addClass('current');//今日はここから。このcurrentクラスをどうやって、次の曲にもっていくのか。最初に呼び込まれた時は、どうやって最初のhashにアクセスさせるのか。
-            var youtubeUrl = 'http://www.youtube.com/v/'+ id +'?enablejsapi=1&playerapiid=ytplayer';
-            var params = { allowScriptAccess: "always" };
-            var atts = { id: "myytplayer" };
-            var flashvars = {};
-            swfobject.embedSWF(youtubeUrl,"ytapiplayer", "425", "356", "8", null, flashvars, params, atts);
-            console.log(youtubeUrl);
-        </script>
-        <ul>
+        <ul id='video_list'>
             <% @setlist.each do |name, count,id|%>
                 <li id='<%= id %>'>
                 <a href='#<%= id %>' class='clearfix' data-id='<%= id %>' title='<%= name %>'>
@@ -35,6 +25,18 @@
                 </li>
             <% end %>
         </ul>
+        <script type="text/javascript">
+            //最初の動画を再生させるためのscript
+            location.hash = $('ul#video_list li:first-child').attr('id');
+            var id = location.hash.substring(1);
+            $('#'+id).addClass('current');
+            var youtubeUrl = 'http://www.youtube.com/v/'+ id +'?enablejsapi=1&playerapiid=ytplayer';
+            var params = { allowScriptAccess: "always" };
+            var atts = { id: "myytplayer" };
+            var flashvars = {};
+            swfobject.embedSWF(youtubeUrl,"ytapiplayer", "425", "356", "8", null, flashvars, params, atts);
+            console.log(youtubeUrl);
+        </script>
     </div>
     </body>
 </html>
