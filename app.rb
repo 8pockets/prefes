@@ -4,7 +4,7 @@
 require 'sinatra'
 require 'sinatra/reloader'
 require 'open-uri'
-#require 'json'
+require 'uri'
 require 'rexml/document'
 require 'rubygems'
 require 'google/api_client'
@@ -21,8 +21,13 @@ get '/:name' do
     #setlistからXMLを取得
     song = REXML::Document.new(open("http://api.setlist.fm/rest/0.1/search/setlists?artistName=#{params[:name]}"))
     song2 = REXML::Document.new(open("http://api.setlist.fm/rest/0.1/search/setlists?artistName=#{params[:name]}&p=2"))
-    rescue OpenURI::HTTPError => ex
-      puts "Handle missing video here"
+    rescue OpenURI::HTTPError,URI::InvalidURIError
+      puts "no data at setlist.fm"
+      url = URI.escape(params[:name])
+      jpsong = REXML::Document.new("http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=#{url}&api_key=22707255549691ea043a7771c96c7d31")
+      jpsong.elements.each('lfm/toptracks/track') do |e|
+        song_array << e.elements['name'].text
+      end
   end
 
   #アーティストの最新ライブ動向
@@ -88,13 +93,13 @@ get '/:name' do
 
   #曲のYouTubeIdを取得する
   begin
-  topsong = "#{params[:name]} "+ count_sort[0][0]
-  @data = main(topsong)
+ # topsong = "#{params[:name]} "+ count_sort[0][0]
+ # @data = main(topsong)
 
-  count_sort[0..2].each do |s|
+  count_sort[0..4].each do |s|
     othersong = "#{params[:name]} "+ s[0]
     s << main(othersong)
-    p s
+    p s #ここで曲ランキン表示
   end
   rescue NoMethodError,Faraday::SSLError
     puts 'NoMethod'

@@ -1,42 +1,6 @@
 <div id="container">
     <ul id='video_list'>
     </ul>
+    <ul id='summersonic'>
+    </ul>
 </div>
-    <script type="text/javascript">
-        //アーティスト一覧表示
-        $(function() {
-            $.getJSON("http://ws.audioscrobbler.com/2.0/?method=event.getinfo&event=3817349&api_key=22707255549691ea043a7771c96c7d31&format=json" , function(data) {
-                var target = $('#video_list');
-                var src = $('<li><dl><dt><a><img /></a></dt><dd></dd></dl></li>');
-                var artist_data = data.event.artists.artist;
-                var len = artist_data.length;
-                for(var i = 0; i < len; i++){
-                    var item = src.clone();
-
-                    var link_artist = artist_data[i].replace(/ /g, '+');
-                    var link = '/'+ link_artist;
-
-                    item = src.clone();
-
-                    var artist_id = artist_data[i].replace(/ /g, "");
-                    item.attr('id' ,artist_id);
-
-                    item.find('a:first').attr('href',link);
-                    item.find('dd:first').text(artist_data[i]);
-                    target.append(item);
-                    imageload(artist_data[i]);
-                };
-             });
-        });
-
-        //アーティストの画像表示
-        function imageload(name) {
-            var key = name;
-            $.getJSON('http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist='+key+'&api_key=22707255549691ea043a7771c96c7d31&format=json',function(data){
-                var target = $('#video_list');
-                var image = data.artist.image[3]['#text'];
-                var replace_key = key.replace(/ /g, "");
-                target.find('#'+replace_key+' img').attr('src', image);
-            });
-        };
-</script>
