@@ -13,6 +13,10 @@
             <% end %>
         </ul>
         <script type="text/javascript">
+            //スクロール禁止させる
+            var scrillTop;
+            scrollTop = $(window).scrollTop();
+            $('body').addClass('noscroll').css('top', (-scrollTop) + 'px');
             //最初の動画を再生させるためのscript
             location.hash = $('ul#video_list li:first-child').attr('id');
             var id = location.hash.substring(1);
@@ -21,7 +25,7 @@
             var params = { allowScriptAccess: "always" };
             var atts = { id: "myytplayer" };
             var flashvars = {};
-            swfobject.embedSWF(youtubeUrl,"ytapiplayer", "425", "356", "8", null, flashvars, params, atts);
+            swfobject.embedSWF(youtubeUrl,"ytapiplayer", "700", "356", "8", null, flashvars, params, atts);
             console.log(youtubeUrl);
         </script>
     </div>

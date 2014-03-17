@@ -24,7 +24,7 @@ get '/:name' do
     rescue OpenURI::HTTPError,URI::InvalidURIError
       puts "no data at setlist.fm"
       url = URI.escape(params[:name])
-      jpsong = REXML::Document.new("http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=#{url}&api_key=22707255549691ea043a7771c96c7d31")
+      jpsong = REXML::Document.new(open("http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=#{url}&api_key=22707255549691ea043a7771c96c7d31"))
       jpsong.elements.each('lfm/toptracks/track') do |e|
         song_array << e.elements['name'].text
       end

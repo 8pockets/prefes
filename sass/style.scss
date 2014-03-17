@@ -1,0 +1,238 @@
+body{
+	/*background-image : url('../img/bg.jpg');*/
+	/*background-attachment:fixed;*/
+	width: 100%;
+	background-color: rgb(241, 242, 246);
+	font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif!important;
+	font-size: 15px;
+}
+body.noscroll {
+	position: fixed;
+	overflow-y: scroll;
+}
+div,p{
+	margin: 0px;
+	padding: 0px;
+}
+/****top******/
+nav{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	background-color: rgba(255,255,255,.9);
+	opacity: 0.9;
+	z-index: 100;
+	height: 50px;
+	
+}
+#header{
+	width: 1000px;
+	margin: 0 auto;
+	.navbar-header{
+		float: left;
+		margin: 10px 0 0 0;
+	}
+	.navbar-collapse{
+		float: right;
+		ul li{
+			margin: 0 20px 0 0;
+			list-style-type: none;
+			float: left;
+			a{
+				text-decoration: none;
+				color: #37BC9B;
+				&:hover{
+					color: #48CFAD;
+				}
+			}
+		}
+	}
+}
+#container{
+	width: 780px;
+	margin: 30px auto;
+	overflow: hidden;
+	.green{
+		background-color: #A0D468;
+	}
+	.blue{
+		background-color: #7cd1ef;
+	}
+}
+#container .ul-block{
+	width: 380px;
+	margin: 0 10px 0 0;
+	padding: 15px 0 0 0;
+	float: left;
+	overflow: hidden;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	.fuji{
+		width: 75px;
+		margin: 0 auto;
+	}
+	.summersonic{
+		width: 120px;
+		margin: 0 auto;
+	}
+}
+
+#container ul{
+	float:left;
+	width:340px;
+	margin: 0 20px;
+	padding: 0px;
+	li{
+		list-style-type: none;
+		float: left;
+		width: 160px;
+		height: 160px;
+		margin-left: 10px;
+		dt{
+			position: relative;
+			width: 160px;
+			height: 100px;
+			overflow: hidden;
+			border-radius: 4px;
+			-moz-border-radius: 4px;
+			-webkit-border-radius: 4px;
+		}
+		dd{
+			margin: 0px;
+			padding: 0px;
+			color: #434a54;
+			text-shadow: 1px 1px 1px #CCD1D9;
+		}
+		a{
+			transition: opacity .25s ease-in-out;
+			-moz-transition: opacity .25s ease-in-out;
+			-webkit-transition: opacity .25s ease-in-out;
+			&:hover{
+				opacity: 0.6;
+			}
+		}
+		img{
+			position: absolute;
+			top: 0px;
+			left: 0px;
+		}
+	}
+}
+@keyframes 'anime' {
+	0% {	opacity:1;	}
+	100% {	opacity:0;	}
+}
+
+#container .ul-block{
+	#KanyeWest{
+		img{
+			position: absolute;
+			top: -30px;
+			left: -30px;
+		}
+	}
+	#ArcticMonkeys{
+		img{
+			position: absolute;
+			top: -20px;
+			left: -50px;
+		}
+	}
+	#FranzFerdinand{
+		img{
+			position: absolute;
+			top: -135px;
+			left: -85px;
+		}
+	}
+	#Pixies{
+		img{
+			position: absolute;
+			top: 0px;
+			left: -40px;
+		}
+	}
+	#Phoenix{
+		img{
+			position: absolute;
+			top: -8px;
+			left: -45px;
+		}
+	}
+	#AvengedSevenfold{
+		img{
+			position: absolute;
+			top: -25px;
+			left: -45px;
+		}
+	}
+	#JackJohnson{
+		img{
+			position: absolute;
+			top: -60px;
+			left: -55px;
+		}
+	}
+	#OutKast{
+		img{
+			position: absolute;
+			top: -35px;
+			left: 0px;
+		}
+	}
+	#FosterthePeople{
+		img{
+			position: absolute;
+			top: -25px;
+			left: -35px;
+		}
+	}
+	#Kelis{
+		img{
+			position: absolute;
+			top: -25px;
+			left: -35px;
+		}
+	}
+	#EllieGoulding{
+		img{
+			position: absolute;
+			top: -25px;
+			left: -90px;
+		}
+	}
+	#Megadeth{
+		img{
+			position: absolute;
+			top: 0px;
+			left: -90px;
+		}
+	}
+	#ManicStreetPreachers{
+		img{
+			position: absolute;
+			top: -55px;
+			left: -35px;
+		}
+	}
+	#Metronomy{
+		img{
+			position: absolute;
+			top: 0px;
+			left: -43px;
+		}
+	}
+	#RobertPlant{
+		img{
+			position: absolute;
+			top: -15px;
+			left: -55px;
+		}
+	}
+}
+/****:name******/
+object{
+  float:left;
+}
