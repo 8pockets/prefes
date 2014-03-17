@@ -11,6 +11,7 @@ require 'google/api_client'
 require 'trollop'
 
 get '/' do
+  erb :index
 end
 
 get '/:name' do
@@ -100,5 +101,5 @@ get '/:name' do
   end
   @setlist = count_sort
 
-  erb :index
+  erb :artist
 end

@@ -1,42 +1,42 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="utf-8">
-    <title>Prefes</title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script type="text/javascript" src="js/swfobject.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
-</head>
-<body>
-    <div id="container">
-        <div id="ytapiplayer">
-            You need Flash player 8+ and JavaScript enabled to view this video.
-        </div>
+<div id="container">
+    <ul id='video_list'>
+    </ul>
+</div>
+    <script type="text/javascript">
+        //アーティスト一覧表示
+        $(function() {
+            $.getJSON("http://ws.audioscrobbler.com/2.0/?method=event.getinfo&event=3817349&api_key=22707255549691ea043a7771c96c7d31&format=json" , function(data) {
+                var target = $('#video_list');
+                var src = $('<li><dl><dt><a><img /></a></dt><dd></dd></dl></li>');
+                var artist_data = data.event.artists.artist;
+                var len = artist_data.length;
+                for(var i = 0; i < len; i++){
+                    var item = src.clone();
 
-        <ul id='video_list'>
-            <% @setlist.each do |name, count,id|%>
-                <li id='<%= id %>'>
-                <a href='#<%= id %>' class='clearfix' data-id='<%= id %>' title='<%= name %>'>
-                    <span>link</span>
-                </a><%= count %>
-                </li>
-            <% end %>
-        </ul>
-        <script type="text/javascript">
-            //最初の動画を再生させるためのscript
-            location.hash = $('ul#video_list li:first-child').attr('id');
-            var id = location.hash.substring(1);
-            $('#'+id).addClass('current');
-            var youtubeUrl = 'http://www.youtube.com/v/'+ id +'?enablejsapi=1&playerapiid=ytplayer';
-            var params = { allowScriptAccess: "always" };
-            var atts = { id: "myytplayer" };
-            var flashvars = {};
-            swfobject.embedSWF(youtubeUrl,"ytapiplayer", "425", "356", "8", null, flashvars, params, atts);
-            console.log(youtubeUrl);
-        </script>
-    </div>
-    </body>
-</html>
+                    var link_artist = artist_data[i].replace(/ /g, '+');
+                    var link = '/'+ link_artist;
+
+                    item = src.clone();
+
+                    var artist_id = artist_data[i].replace(/ /g, "");
+                    item.attr('id' ,artist_id);
+
+                    item.find('a:first').attr('href',link);
+                    item.find('dd:first').text(artist_data[i]);
+                    target.append(item);
+                    imageload(artist_data[i]);
+                };
+             });
+        });
+
+        //アーティストの画像表示
+        function imageload(name) {
+            var key = name;
+            $.getJSON('http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist='+key+'&api_key=22707255549691ea043a7771c96c7d31&format=json',function(data){
+                var target = $('#video_list');
+                var image = data.artist.image[3]['#text'];
+                var replace_key = key.replace(/ /g, "");
+                target.find('#'+replace_key+' img').attr('src', image);
+            });
+        };
+</script>
