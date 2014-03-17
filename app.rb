@@ -4,11 +4,11 @@
 require 'sinatra'
 require 'sinatra/reloader'
 require 'open-uri'
-require 'uri'
+#require 'uri'
 require 'rexml/document'
-require 'rubygems'
-require 'google/api_client'
-require 'trollop'
+#require 'rubygems'
+#require 'google/api_client'
+#require 'trollop'
 
 get '/' do
   erb :index
@@ -54,57 +54,58 @@ get '/:name' do
   count_sort = count.sort_by{|key,val| -val}
   p count_sort
 
-  #YouTubeにて曲のIDを取得
-  def get_service
-    client = Google::APIClient.new(
-      :key =>'AIzaSyD--VtPKQU9ac1SeY4XMdYkWivGkMuSvLM',
-      :authorization => nil,
-      :application_name => 'prefes',
-      :application_version => '1.0.0'
-    )
-    youtube = client.discovered_api('youtube', 'v3')
-    return client, youtube
-  end
-
-  def main(search)
-    opts = Trollop::options do
-      opt :q, 'Search Term', :type => String, :default => search
-      opt :max_results, 'Max results', :type => :int, :default => 1
-    end
-
-    client, youtube = get_service
-    begin
-      # Call the search.list method to retrieve results matching the specified
-      search_response = client.execute!(
-        :api_method => youtube.search.list,
-        :parameters => {
-        :part => 'snippet',
-        :q => opts[:q],
-        :maxResults => opts[:max_results]
-        }
-      )
-
-      return search_response.data.items[0]['id']['videoId']
-
-    rescue Google::APIClient::TransmissionError => e
-      puts e.result.body
-    end
-  end
-
-  #曲のYouTubeIdを取得する
-  begin
- # topsong = "#{params[:name]} "+ count_sort[0][0]
- # @data = main(topsong)
-
-  count_sort[0..4].each do |s|
-    othersong = "#{params[:name]} "+ s[0]
-    s << main(othersong)
-    p s #ここで曲ランキン表示
-  end
-  rescue NoMethodError,Faraday::SSLError
-    puts 'NoMethod'
-  end
   @setlist = count_sort
+
+#  #YouTubeにて曲のIDを取得
+#  def get_service
+#    client = Google::APIClient.new(
+#      :key =>'AIzaSyD--VtPKQU9ac1SeY4XMdYkWivGkMuSvLM',
+#      :authorization => nil,
+#      :application_name => 'prefes',
+#      :application_version => '1.0.0'
+#    )
+#    youtube = client.discovered_api('youtube', 'v3')
+#    return client, youtube
+#  end
+#
+#  def main(search)
+#    opts = Trollop::options do
+#      opt :q, 'Search Term', :type => String, :default => search
+#      opt :max_results, 'Max results', :type => :int, :default => 1
+#    end
+#
+#    client, youtube = get_service
+#    begin
+#      # Call the search.list method to retrieve results matching the specified
+#      search_response = client.execute!(
+#        :api_method => youtube.search.list,
+#        :parameters => {
+#        :part => 'snippet',
+#        :q => opts[:q],
+#        :maxResults => opts[:max_results]
+#        }
+#      )
+#
+#      return search_response.data.items[0]['id']['videoId']
+#
+#    rescue Google::APIClient::TransmissionError => e
+#      puts e.result.body
+#    end
+#  end
+
+#  #曲のYouTubeIdを取得する
+#  begin
+# # topsong = "#{params[:name]} "+ count_sort[0][0]
+# # @data = main(topsong)
+#
+#  count_sort[0..4].each do |s|
+#    othersong = "#{params[:name]} "+ s[0]
+#    s << main(othersong)
+#    p s #ここで曲ランキン表示
+#  end
+#  rescue NoMethodError,Faraday::SSLError
+#    puts 'NoMethod'
+#  end
 
   erb :artist
 end

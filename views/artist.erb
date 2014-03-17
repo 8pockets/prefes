@@ -1,31 +1,22 @@
-    <div id="container">
+    <div id="artist-container">
         <div id="ytapiplayer">
             You need Flash player 8+ and JavaScript enabled to view this video.
         </div>
 
         <ul id='video_list'>
-            <% @setlist.each do |name, count,id|%>
-                <li id='<%= id %>'>
-                <a href='#<%= id %>' class='clearfix' data-id='<%= id %>' title='<%= name %>'>
-                    <span>link</span>
+            <% @setlist.each do |name, count|%>
+                <li id=''>
+                <a href='' class='clearfix' data-id='' title='<%= name %>'>
+                	<img>
+                    <span><%= name %></span>
                 </a><%= count %>
                 </li>
             <% end %>
         </ul>
-        <script type="text/javascript">
-            //スクロール禁止させる
-            var scrillTop;
-            scrollTop = $(window).scrollTop();
-            $('body').addClass('noscroll').css('top', (-scrollTop) + 'px');
-            //最初の動画を再生させるためのscript
-            location.hash = $('ul#video_list li:first-child').attr('id');
-            var id = location.hash.substring(1);
-            $('#'+id).addClass('current');
-            var youtubeUrl = 'http://www.youtube.com/v/'+ id +'?enablejsapi=1&playerapiid=ytplayer';
-            var params = { allowScriptAccess: "always" };
-            var atts = { id: "myytplayer" };
-            var flashvars = {};
-            swfobject.embedSWF(youtubeUrl,"ytapiplayer", "700", "356", "8", null, flashvars, params, atts);
-            console.log(youtubeUrl);
-        </script>
     </div>
+<script type="text/javascript">
+	//スクロール禁止させる
+	var scrillTop;
+	scrollTop = $(window).scrollTop();
+	$('body').addClass('noscroll').css('top', (-scrollTop) + 'px');
+</script>

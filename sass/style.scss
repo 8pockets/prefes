@@ -29,9 +29,10 @@ nav{
 #header{
 	width: 1000px;
 	margin: 0 auto;
+	overflow: hidden;
 	.navbar-header{
 		float: left;
-		margin: 10px 0 0 0;
+		margin: 5px 0 0 0;
 	}
 	.navbar-collapse{
 		float: right;
@@ -79,7 +80,7 @@ nav{
 	}
 }
 
-#container ul{
+#container .ul-block ul{
 	float:left;
 	width:340px;
 	margin: 0 20px;
@@ -215,6 +216,13 @@ nav{
 			position: absolute;
 			top: -55px;
 			left: -35px;
+		}
+	}
+	#BasementJaxx{
+		img{
+			position: absolute;
+			top: -15px;
+			left: -30px;
 		}
 	}
 	#Metronomy{
