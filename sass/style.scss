@@ -1,6 +1,6 @@
 body{
-	/*background-image : url('../img/bg.jpg');*/
-	/*background-attachment:fixed;*/
+	/*background-image : url('../img/bg2.jpg');
+	background-attachment:fixed;*/
 	width: 100%;
 	background-color: rgb(241, 242, 246);
 	font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif!important;
@@ -10,9 +10,16 @@ body.noscroll {
 	position: fixed;
 	overflow-y: scroll;
 }
-div,p{
+body,div,ul,li{
 	margin: 0px;
 	padding: 0px;
+}
+ul li{
+	list-style-type: none;
+}
+a,a:hover,a:visited{
+	text-decoration: none;
+	color: #434a54;
 }
 /****top******/
 nav{
@@ -21,7 +28,6 @@ nav{
 	left: 0px;
 	width: 100%;
 	background-color: rgba(255,255,255,.9);
-	opacity: 0.9;
 	z-index: 100;
 	height: 50px;
 	
@@ -36,9 +42,9 @@ nav{
 	}
 	.navbar-collapse{
 		float: right;
+		margin-top: 15px;
 		ul li{
 			margin: 0 20px 0 0;
-			list-style-type: none;
 			float: left;
 			a{
 				text-decoration: none;
@@ -51,8 +57,8 @@ nav{
 	}
 }
 #container{
-	width: 780px;
-	margin: 30px auto;
+	width: 1000px;
+	margin: 0px auto;
 	overflow: hidden;
 	.green{
 		background-color: #A0D468;
@@ -78,6 +84,10 @@ nav{
 		width: 120px;
 		margin: 0 auto;
 	}
+	.title{
+		text-shadow: 1px 1px 1px #E6E9ED;
+		font-weight: 700;
+	}
 }
 
 #container .ul-block ul{
@@ -86,7 +96,6 @@ nav{
 	margin: 0 20px;
 	padding: 0px;
 	li{
-		list-style-type: none;
 		float: left;
 		width: 160px;
 		height: 160px;
@@ -104,7 +113,6 @@ nav{
 			margin: 0px;
 			padding: 0px;
 			color: #434a54;
-			text-shadow: 1px 1px 1px #CCD1D9;
 		}
 		a{
 			transition: opacity .25s ease-in-out;
@@ -120,6 +128,12 @@ nav{
 			left: 0px;
 		}
 	}
+}
+.blue dd{
+	text-shadow: 1px 1px 1px #3BAFDA;
+}
+.green dd{
+	text-shadow: 1px 1px 1px #8CC152;
 }
 @keyframes 'anime' {
 	0% {	opacity:1;	}
@@ -243,4 +257,34 @@ nav{
 /****:name******/
 object{
   float:left;
+  margin-right: 20px;
+}
+#artist-container{
+	width: 1000px;
+	overflow: hidden;
+}
+#scrollwrap{
+	height: 500px;
+	width: 280px;
+	overflow: auto;
+}
+ul#video_list{
+	float: right;
+	width: 280px;
+	overflow: hidden;
+	li{
+		a{
+			text-shadow: 1px 1px 1px #E6E9ED;
+			display: block;
+			span{
+				vertical-align: top;
+			}
+			img{
+				width: 100px;
+			}
+		}
+	}
+	li.current a{
+		color: #E9573F;
+	}
 }

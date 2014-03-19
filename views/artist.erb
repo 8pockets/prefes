@@ -1,22 +1,47 @@
-    <div id="artist-container">
-        <div id="ytapiplayer">
-            You need Flash player 8+ and JavaScript enabled to view this video.
-        </div>
-
-        <ul id='video_list'>
-            <% @setlist.each do |name, count|%>
-                <li id=''>
-                <a href='' class='clearfix' data-id='' title='<%= name %>'>
-                	<img>
-                    <span><%= name %></span>
-                </a><%= count %>
-                </li>
-            <% end %>
-        </ul>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/swfobject.js"></script>
+<div id="artist-container">
+    <div id="ytapiplayer">
+        You need Flash player 8+ and JavaScript enabled to view this video.
     </div>
+	<div id= 'scrollwrap'>
+	    <ul id='video_list'>
+	        <% @setlist.each do |name, count|%>
+	            <li id=''>
+	            <a href='' class='clearfix' data-id='' title='<%= name %>'>
+	            	<img>
+	                <span><%= name %></span>/<%= count %>
+	            </a>
+	            </li>
+	        <% end %>
+	    </ul>
+	</div>
+</div>
 <script type="text/javascript">
 	//スクロール禁止させる
+/*
 	var scrillTop;
 	scrollTop = $(window).scrollTop();
 	$('body').addClass('noscroll').css('top', (-scrollTop) + 'px');
+*/
+</script>
+<script>
+    (function($){
+        $(window).load(function(){
+            $("#scrollwrap").mCustomScrollbar({
+	            advanced: {
+			      updateOnContentResize: true, //自動的にスクロールバーを調整してくれる
+			    },
+			    mouseWheelPixels: 80,      //スクロール量 デフォルトに近づけた。お好みで変更
+			    autoHideScrollbar: false,   //マウスオーバーしていないときにスクロールバーを隠すか お好みで
+			    scrollButtons:{
+			      enable: false,             //ボタンを出すか。個人的には不要（falseにしたら以下は指定不要）
+			      scrollType: "continuous",  //ボタンを押してる間だけ進む
+			      scrollSpeed: 90,          //ボタンのスクロールスピード OSデフォルトに近いづけた。お好みで変更
+			      scrollAmount: 50          //ボタンのスクロール量 OSデフォルトに近いづけた。お好みで変更
+			    },
+				theme: "dark-thick"
+            });
+        });
+    })(jQuery);
 </script>

@@ -1,6 +1,6 @@
 body {
-  /*background-image : url('../img/bg.jpg');*/
-  /*background-attachment:fixed;*/
+  /*background-image : url('../img/bg2.jpg');
+  background-attachment:fixed;*/
   width: 100%;
   background-color: #f1f2f6;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
@@ -12,9 +12,18 @@ body.noscroll {
   overflow-y: scroll;
 }
 
-div, p {
+body, div, ul, li {
   margin: 0px;
   padding: 0px;
+}
+
+ul li {
+  list-style-type: none;
+}
+
+a, a:hover, a:visited {
+  text-decoration: none;
+  color: #434a54;
 }
 
 /****top******/
@@ -24,7 +33,6 @@ nav {
   left: 0px;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.9);
-  opacity: 0.9;
   z-index: 100;
   height: 50px;
 }
@@ -40,10 +48,10 @@ nav {
 }
 #header .navbar-collapse {
   float: right;
+  margin-top: 15px;
 }
 #header .navbar-collapse ul li {
   margin: 0 20px 0 0;
-  list-style-type: none;
   float: left;
 }
 #header .navbar-collapse ul li a {
@@ -55,8 +63,8 @@ nav {
 }
 
 #container {
-  width: 780px;
-  margin: 30px auto;
+  width: 1000px;
+  margin: 0px auto;
   overflow: hidden;
 }
 #container .green {
@@ -84,6 +92,10 @@ nav {
   width: 120px;
   margin: 0 auto;
 }
+#container .ul-block .title {
+  text-shadow: 1px 1px 1px #E6E9ED;
+  font-weight: 700;
+}
 
 #container .ul-block ul {
   float: left;
@@ -92,7 +104,6 @@ nav {
   padding: 0px;
 }
 #container .ul-block ul li {
-  list-style-type: none;
   float: left;
   width: 160px;
   height: 160px;
@@ -111,7 +122,6 @@ nav {
   margin: 0px;
   padding: 0px;
   color: #434a54;
-  text-shadow: 1px 1px 1px #CCD1D9;
 }
 #container .ul-block ul li a {
   transition: opacity .25s ease-in-out;
@@ -125,6 +135,14 @@ nav {
   position: absolute;
   top: 0px;
   left: 0px;
+}
+
+.blue dd {
+  text-shadow: 1px 1px 1px #3BAFDA;
+}
+
+.green dd {
+  text-shadow: 1px 1px 1px #8CC152;
 }
 
 @keyframes 'anime' {
@@ -221,4 +239,35 @@ nav {
 /****:name******/
 object {
   float: left;
+  margin-right: 20px;
+}
+
+#artist-container {
+  width: 1000px;
+  overflow: hidden;
+}
+
+#scrollwrap {
+  height: 500px;
+  width: 280px;
+  overflow: auto;
+}
+
+ul#video_list {
+  float: right;
+  width: 280px;
+  overflow: hidden;
+}
+ul#video_list li a {
+  text-shadow: 1px 1px 1px #E6E9ED;
+  display: block;
+}
+ul#video_list li a span {
+  vertical-align: top;
+}
+ul#video_list li a img {
+  width: 100px;
+}
+ul#video_list li.current a {
+  color: #E9573F;
 }

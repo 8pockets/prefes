@@ -36,6 +36,7 @@ get '/:name' do
 
   #setlistからXMLをパース
   begin
+    p song
     song.elements.each('setlists/setlist/sets/set/song') do |e|
        song_array << e.attributes["name"]
     end
@@ -52,6 +53,11 @@ get '/:name' do
     count[c] += 1
   end
   count_sort = count.sort_by{|key,val| -val}
+  count_sort.each do |p|
+    percent = p[1].to_f/40.to_f
+    p[1] = percent.round(2)
+  end
+
   p count_sort
 
   @setlist = count_sort
