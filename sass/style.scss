@@ -1,6 +1,8 @@
 body{
-	/*background-image : url('../img/bg2.jpg');
-	background-attachment:fixed;*/
+	background-image : url('../img/bg7.jpg');
+	background-attachment:fixed;
+	background-size:cover;
+	min-height: 100%;
 	width: 100%;
 	background-color: rgb(241, 242, 246);
 	font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif!important;
@@ -61,15 +63,18 @@ nav{
 	margin: 0px auto;
 	overflow: hidden;
 	.green{
-		background-color: #A0D468;
+		/*background-color: rgba(160, 212, 104, 0.8);*/
 	}
 	.blue{
-		background-color: #7cd1ef;
+		/*background-color: rgba(78, 193, 233, 0.8);*/
+	}
+	.dark{
+		/*background-color: #CCD1D9;*/
 	}
 }
 #container .ul-block{
-	width: 380px;
-	margin: 0 10px 0 0;
+	width: 450px;
+	margin: 0 20px;
 	padding: 15px 0 0 0;
 	float: left;
 	overflow: hidden;
@@ -79,31 +84,41 @@ nav{
 	.fuji{
 		width: 75px;
 		margin: 0 auto;
+		background-color: #8CC152;
+		color: #fff;
+		padding: 5px 166px;
 	}
 	.summersonic{
 		width: 120px;
 		margin: 0 auto;
+		background-color: #4A89DC;
+		color: #fff;
+		padding: 5px 145px;
+	}
+	.tomorrowland{
+		width: 112px;
+		margin: 0 auto;
 	}
 	.title{
-		text-shadow: 1px 1px 1px #E6E9ED;
 		font-weight: 700;
 	}
 }
 
 #container .ul-block ul{
 	float:left;
-	width:340px;
+	width:430px;
 	margin: 0 20px;
-	padding: 0px;
+	padding: 0 0 20px 0;
 	li{
 		float: left;
-		width: 160px;
-		height: 160px;
-		margin-left: 10px;
+		width: 126px;
+		height: 152px;
+		margin-right: 16px;
+		overflow:hidden;
 		dt{
 			position: relative;
-			width: 160px;
-			height: 100px;
+			width: 126px;
+			height: 85px;
 			overflow: hidden;
 			border-radius: 4px;
 			-moz-border-radius: 4px;
@@ -111,8 +126,9 @@ nav{
 		}
 		dd{
 			margin: 0px;
-			padding: 0px;
-			color: #434a54;
+			padding: 3px;
+			color: #F5F7FA;
+			background-color:rgba(66, 74, 84, 0.8);
 		}
 		a{
 			transition: opacity .25s ease-in-out;
@@ -123,23 +139,21 @@ nav{
 			}
 		}
 		img{
-			position: absolute;
-			top: 0px;
-			left: 0px;
 		}
 	}
 }
 .blue dd{
-	text-shadow: 1px 1px 1px #3BAFDA;
+	text-shadow: 1px 1px 1px #000;
 }
 .green dd{
-	text-shadow: 1px 1px 1px #8CC152;
+	text-shadow: 1px 1px 1px #000;
 }
 @keyframes 'anime' {
 	0% {	opacity:1;	}
 	100% {	opacity:0;	}
 }
 
+/*
 #container .ul-block{
 	#KanyeWest{
 		img{
@@ -254,6 +268,12 @@ nav{
 		}
 	}
 }
+*/
+.ul-block ul#tomorrowland li img{
+	position: absolute;
+	top: -45px;
+	left: -35px;
+}
 /****:name******/
 object{
   float:left;
@@ -272,15 +292,35 @@ ul#video_list{
 	float: right;
 	width: 280px;
 	overflow: hidden;
+	background-color:rgba(245, 247, 250, 0.9);
 	li{
+		margin: 0 0 10px 10px;
 		a{
 			text-shadow: 1px 1px 1px #E6E9ED;
 			display: block;
-			span{
-				vertical-align: top;
-			}
+			overflow: hidden;
 			img{
 				width: 100px;
+				float:left;
+			}
+			.songinfo{
+				float:left;
+				width:160px;
+				margin:3px 0 0 10px;
+			}
+			.songname{
+			}
+			.percent{
+				background-color: #aab2bd;
+				display: inline;
+				padding: .2em .6em .2em;
+				font-size: 75%;
+				color: #fff;
+				text-align: center;
+				text-shadow:none;
+				white-space: nowrap;
+				vertical-align: baseline;
+				border-radius: .25em;
 			}
 		}
 	}

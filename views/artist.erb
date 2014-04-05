@@ -4,44 +4,54 @@
     <div id="ytapiplayer">
         You need Flash player 8+ and JavaScript enabled to view this video.
     </div>
-	<div id= 'scrollwrap'>
-	    <ul id='video_list'>
-	        <% @setlist.each do |name, count|%>
-	            <li id=''>
-	            <a href='' class='clearfix' data-id='' title='<%= name %>'>
-	            	<img>
-	                <span><%= name %></span>/<%= count %>
-	            </a>
-	            </li>
-	        <% end %>
-	    </ul>
-	</div>
+    <div id= 'scrollwrap'>
+        <ul id='video_list'>
+            <% @setlist.each do |name, count|%>
+                <li id=''>
+                <a href='' class='clearfix' data-id='' title='<%= name %>'>
+                    <img>
+                    <div class='songinfo'>
+                        <div class='songname'><%= name %></div>
+                        <div class='percent'><%= count %>%</div>
+                    </div>
+                </a>
+                </li>
+            <% end %>
+        </ul>
+    </div>
 </div>
 <script type="text/javascript">
-	//スクロール禁止させる
+    //スクロール禁止させる
 /*
-	var scrillTop;
-	scrollTop = $(window).scrollTop();
-	$('body').addClass('noscroll').css('top', (-scrollTop) + 'px');
-*/
+   var scrillTop;
+   scrollTop = $(window).scrollTop();
+   $('body').addClass('noscroll').css('top', (-scrollTop) + 'px');
+ */
 </script>
 <script>
-    (function($){
-        $(window).load(function(){
-            $("#scrollwrap").mCustomScrollbar({
-	            advanced: {
-			      updateOnContentResize: true, //自動的にスクロールバーを調整してくれる
-			    },
-			    mouseWheelPixels: 80,      //スクロール量 デフォルトに近づけた。お好みで変更
-			    autoHideScrollbar: false,   //マウスオーバーしていないときにスクロールバーを隠すか お好みで
-			    scrollButtons:{
-			      enable: false,             //ボタンを出すか。個人的には不要（falseにしたら以下は指定不要）
-			      scrollType: "continuous",  //ボタンを押してる間だけ進む
-			      scrollSpeed: 90,          //ボタンのスクロールスピード OSデフォルトに近いづけた。お好みで変更
-			      scrollAmount: 50          //ボタンのスクロール量 OSデフォルトに近いづけた。お好みで変更
-			    },
-				theme: "dark-thick"
-            });
+(function($){
+    $(window).load(function(){
+        $("#scrollwrap").mCustomScrollbar({
+            advanced: {
+                updateOnContentResize: true, //自動的にスクロールバーを調整してくれる
+            },
+            mouseWheelPixels: 130,      //スクロール量 デフォルトに近づけた。お好みで変更
+            autoHideScrollbar: true,   //マウスオーバーしていないときにスクロールバーを隠すか お好みで
+            scrollButtons:{
+                enable: false,             //ボタンを出すか。個人的には不要（falseにしたら以下は指定不要）
+                scrollType: "continuous",  //ボタンを押してる間だけ進む
+                scrollSpeed: 90,          //ボタンのスクロールスピード OSデフォルトに近いづけた。お好みで変更
+                scrollAmount: 60          //ボタンのスクロール量 OSデフォルトに近いづけた。お好みで変更
+            },
+            theme: "dark-thick"
         });
-    })(jQuery);
+    });
+})(jQuery);
+$('ul#video_list > li').click(function(){
+    $('ul#video_list > li').removeClass('current');
+    $(this).addClass('current');
+    var id = $(this).attr('id');
+    console.log(id);
+    loadVideo(id);
+});
 </script>

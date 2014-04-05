@@ -1,6 +1,8 @@
 body {
-  /*background-image : url('../img/bg2.jpg');
-  background-attachment:fixed;*/
+  background-image: url("../img/bg7.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  min-height: 100%;
   width: 100%;
   background-color: #f1f2f6;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
@@ -68,15 +70,18 @@ nav {
   overflow: hidden;
 }
 #container .green {
-  background-color: #A0D468;
+  /*background-color: rgba(160, 212, 104, 0.8);*/
 }
 #container .blue {
-  background-color: #7cd1ef;
+  /*background-color: rgba(78, 193, 233, 0.8);*/
+}
+#container .dark {
+  /*background-color: #CCD1D9;*/
 }
 
 #container .ul-block {
-  width: 380px;
-  margin: 0 10px 0 0;
+  width: 450px;
+  margin: 0 20px;
   padding: 15px 0 0 0;
   float: left;
   overflow: hidden;
@@ -87,32 +92,42 @@ nav {
 #container .ul-block .fuji {
   width: 75px;
   margin: 0 auto;
+  background-color: #8CC152;
+  color: #fff;
+  padding: 5px 166px;
 }
 #container .ul-block .summersonic {
   width: 120px;
   margin: 0 auto;
+  background-color: #4A89DC;
+  color: #fff;
+  padding: 5px 145px;
+}
+#container .ul-block .tomorrowland {
+  width: 112px;
+  margin: 0 auto;
 }
 #container .ul-block .title {
-  text-shadow: 1px 1px 1px #E6E9ED;
   font-weight: 700;
 }
 
 #container .ul-block ul {
   float: left;
-  width: 340px;
+  width: 430px;
   margin: 0 20px;
-  padding: 0px;
+  padding: 0 0 20px 0;
 }
 #container .ul-block ul li {
   float: left;
-  width: 160px;
-  height: 160px;
-  margin-left: 10px;
+  width: 126px;
+  height: 152px;
+  margin-right: 16px;
+  overflow: hidden;
 }
 #container .ul-block ul li dt {
   position: relative;
-  width: 160px;
-  height: 100px;
+  width: 126px;
+  height: 85px;
   overflow: hidden;
   border-radius: 4px;
   -moz-border-radius: 4px;
@@ -120,8 +135,9 @@ nav {
 }
 #container .ul-block ul li dd {
   margin: 0px;
-  padding: 0px;
-  color: #434a54;
+  padding: 3px;
+  color: #F5F7FA;
+  background-color: rgba(66, 74, 84, 0.8);
 }
 #container .ul-block ul li a {
   transition: opacity .25s ease-in-out;
@@ -131,18 +147,13 @@ nav {
 #container .ul-block ul li a:hover {
   opacity: 0.6;
 }
-#container .ul-block ul li img {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-}
 
 .blue dd {
-  text-shadow: 1px 1px 1px #3BAFDA;
+  text-shadow: 1px 1px 1px #000;
 }
 
 .green dd {
-  text-shadow: 1px 1px 1px #8CC152;
+  text-shadow: 1px 1px 1px #000;
 }
 
 @keyframes 'anime' {
@@ -155,85 +166,126 @@ nav {
   }
 }
 
-#container .ul-block #KanyeWest img {
-  position: absolute;
-  top: -30px;
-  left: -30px;
+/*
+#container .ul-block{
+	#KanyeWest{
+		img{
+			position: absolute;
+			top: -30px;
+			left: -30px;
+		}
+	}
+	#ArcticMonkeys{
+		img{
+			position: absolute;
+			top: -20px;
+			left: -50px;
+		}
+	}
+	#FranzFerdinand{
+		img{
+			position: absolute;
+			top: -135px;
+			left: -85px;
+		}
+	}
+	#Pixies{
+		img{
+			position: absolute;
+			top: 0px;
+			left: -40px;
+		}
+	}
+	#Phoenix{
+		img{
+			position: absolute;
+			top: -8px;
+			left: -45px;
+		}
+	}
+	#AvengedSevenfold{
+		img{
+			position: absolute;
+			top: -25px;
+			left: -45px;
+		}
+	}
+	#JackJohnson{
+		img{
+			position: absolute;
+			top: -60px;
+			left: -55px;
+		}
+	}
+	#OutKast{
+		img{
+			position: absolute;
+			top: -35px;
+			left: 0px;
+		}
+	}
+	#FosterthePeople{
+		img{
+			position: absolute;
+			top: -25px;
+			left: -35px;
+		}
+	}
+	#Kelis{
+		img{
+			position: absolute;
+			top: -25px;
+			left: -35px;
+		}
+	}
+	#EllieGoulding{
+		img{
+			position: absolute;
+			top: -25px;
+			left: -90px;
+		}
+	}
+	#Megadeth{
+		img{
+			position: absolute;
+			top: 0px;
+			left: -90px;
+		}
+	}
+	#ManicStreetPreachers{
+		img{
+			position: absolute;
+			top: -55px;
+			left: -35px;
+		}
+	}
+	#BasementJaxx{
+		img{
+			position: absolute;
+			top: -15px;
+			left: -30px;
+		}
+	}
+	#Metronomy{
+		img{
+			position: absolute;
+			top: 0px;
+			left: -43px;
+		}
+	}
+	#RobertPlant{
+		img{
+			position: absolute;
+			top: -15px;
+			left: -55px;
+		}
+	}
 }
-#container .ul-block #ArcticMonkeys img {
+*/
+.ul-block ul#tomorrowland li img {
   position: absolute;
-  top: -20px;
-  left: -50px;
-}
-#container .ul-block #FranzFerdinand img {
-  position: absolute;
-  top: -135px;
-  left: -85px;
-}
-#container .ul-block #Pixies img {
-  position: absolute;
-  top: 0px;
-  left: -40px;
-}
-#container .ul-block #Phoenix img {
-  position: absolute;
-  top: -8px;
-  left: -45px;
-}
-#container .ul-block #AvengedSevenfold img {
-  position: absolute;
-  top: -25px;
-  left: -45px;
-}
-#container .ul-block #JackJohnson img {
-  position: absolute;
-  top: -60px;
-  left: -55px;
-}
-#container .ul-block #OutKast img {
-  position: absolute;
-  top: -35px;
-  left: 0px;
-}
-#container .ul-block #FosterthePeople img {
-  position: absolute;
-  top: -25px;
+  top: -45px;
   left: -35px;
-}
-#container .ul-block #Kelis img {
-  position: absolute;
-  top: -25px;
-  left: -35px;
-}
-#container .ul-block #EllieGoulding img {
-  position: absolute;
-  top: -25px;
-  left: -90px;
-}
-#container .ul-block #Megadeth img {
-  position: absolute;
-  top: 0px;
-  left: -90px;
-}
-#container .ul-block #ManicStreetPreachers img {
-  position: absolute;
-  top: -55px;
-  left: -35px;
-}
-#container .ul-block #BasementJaxx img {
-  position: absolute;
-  top: -15px;
-  left: -30px;
-}
-#container .ul-block #Metronomy img {
-  position: absolute;
-  top: 0px;
-  left: -43px;
-}
-#container .ul-block #RobertPlant img {
-  position: absolute;
-  top: -15px;
-  left: -55px;
 }
 
 /****:name******/
@@ -257,16 +309,36 @@ ul#video_list {
   float: right;
   width: 280px;
   overflow: hidden;
+  background-color: rgba(245, 247, 250, 0.9);
+}
+ul#video_list li {
+  margin: 0 0 10px 10px;
 }
 ul#video_list li a {
   text-shadow: 1px 1px 1px #E6E9ED;
   display: block;
-}
-ul#video_list li a span {
-  vertical-align: top;
+  overflow: hidden;
 }
 ul#video_list li a img {
   width: 100px;
+  float: left;
+}
+ul#video_list li a .songinfo {
+  float: left;
+  width: 160px;
+  margin: 3px 0 0 10px;
+}
+ul#video_list li a .percent {
+  background-color: #aab2bd;
+  display: inline;
+  padding: .2em .6em .2em;
+  font-size: 75%;
+  color: #fff;
+  text-align: center;
+  text-shadow: none;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
 }
 ul#video_list li.current a {
   color: #E9573F;

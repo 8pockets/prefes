@@ -1,17 +1,20 @@
 #!/usr/bin/ruby
 # -*- coding: utf-8 -*-
 
+require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
 require 'open-uri'
 #require 'uri'
 require 'rexml/document'
-#require 'rubygems'
 #require 'google/api_client'
 #require 'trollop'
 
 get '/' do
   erb :index
+end
+get '/about' do
+  erb :about
 end
 
 get '/:name' do
@@ -22,6 +25,7 @@ get '/:name' do
     song = REXML::Document.new(open("http://api.setlist.fm/rest/0.1/search/setlists?artistName=#{params[:name]}"))
     song2 = REXML::Document.new(open("http://api.setlist.fm/rest/0.1/search/setlists?artistName=#{params[:name]}&p=2"))
     rescue OpenURI::HTTPError,URI::InvalidURIError
+    #もしsetlistから取得出来なかった場合
       puts "no data at setlist.fm"
       url = URI.escape(params[:name])
       jpsong = REXML::Document.new(open("http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=#{url}&api_key=22707255549691ea043a7771c96c7d31"))
@@ -36,16 +40,27 @@ get '/:name' do
 
   #setlistからXMLをパース
   begin
-    p song
     song.elements.each('setlists/setlist/sets/set/song') do |e|
-       song_array << e.attributes["name"]
+      song_array << e.attributes["name"]
     end
     song2.elements.each('setlists/setlist/sets/set/song') do |e|
-       song_array << e.attributes["name"]
+      song_array << e.attributes["name"]
     end
-    rescue NoMethodError
-      puts 'NoMethod'
+    song_count = 0
+    if(song.elements['setlist/setlist/sets/set/song'] != false)
+      song.elements.each('setlists/setlist') do |d|
+        song_count += 1
+      end
+    end
+    if(song2.elements['setlist/setlist/sets/set/song'] != false)
+      song2.elements.each('setlists/setlist') do |d|
+        song_count += 1
+      end
+    end
+  rescue NoMethodError
+    puts 'NoMethod'
   end
+  p song_count
 
   #配列中の曲の回数をカウント
   count = Hash.new(0)
@@ -53,12 +68,23 @@ get '/:name' do
     count[c] += 1
   end
   count_sort = count.sort_by{|key,val| -val}
-  count_sort.each do |p|
-    percent = p[1].to_f/40.to_f
-    p[1] = percent.round(2)
+
+  #Topの30曲だけにする
+  count_sort.each do |l|
+    if count_sort.length > 30
+      count_sort.pop
+    end
   end
 
-  p count_sort
+  #曲のパーセント
+  count_sort.each do |p|
+    rate = p[1].to_f/song_count.to_f
+    percent = rate*100
+    p[1] = percent.round(2)
+    p p[1]
+  end
+
+  p count_sort.size
 
   @setlist = count_sort
 
