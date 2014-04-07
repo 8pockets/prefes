@@ -43,28 +43,28 @@ $.getJSON('http://ws.audioscrobbler.com/2.0/?method=event.getinfo&event=3775159&
       imageload(artist_data[i]);
     };
 });
-//$.getJSON('http://ws.audioscrobbler.com/2.0/?method=event.getinfo&event=3767040&api_key=22707255549691ea043a7771c96c7d31&format=json', function(data) {
-//    var target = $('#tomorrowland');
-//    var src = $('<li><dl><dt><a><img /></a></dt><dd></dd></dl></li>');
-//    var artist_data = data.event.artists.artist;
-//    var len = artist_data.length;
-//    for(var i = 0; i < len; i++){
-//      var item = src.clone();
-//
-//      var link_artist = artist_data[i].replace(/ /g, '+');
-//      var link = '/'+ link_artist;
-//
-//      item = src.clone();
-//
-//      var artist_id = artist_data[i].replace(/ /g, "").replace(/\./, "");
-//      item.attr('id' ,artist_id);
-//
-//      item.find('a:first').attr('href',link);
-//      item.find('dd:first').text(artist_data[i]);
-//      target.append(item);
-//      imageload(artist_data[i]);
-//    };
-//});
+$.getJSON('http://ws.audioscrobbler.com/2.0/?method=event.getinfo&event=3776892&api_key=22707255549691ea043a7771c96c7d31&format=json', function(data) {
+    var target = $('#sonicmania');
+    var src = $('<li><dl><dt><a><img /></a></dt><dd></dd></dl></li>');
+    var artist_data = data.event.artists.artist;
+    var len = artist_data.length;
+    for(var i = 0; i < len; i++){
+      var item = src.clone();
+
+      var link_artist = artist_data[i].replace(/ /g, '+');
+      var link = '/'+ link_artist;
+
+      item = src.clone();
+
+      var artist_id = artist_data[i].replace(/ /g, "").replace(/\./, "");
+      item.attr('id' ,artist_id);
+
+      item.find('a:first').attr('href',link);
+      item.find('dd:first').text(artist_data[i]);
+      target.append(item);
+      imageload(artist_data[i]);
+    };
+});
 
 });
 

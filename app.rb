@@ -20,18 +20,28 @@ end
 get '/:name' do
   song_array = []
 
+  #アーティストの例外処理(mbid)
+  case params[:name]
+   when 'Banks'
+     params[:name] = 'faa28a33-5470-4b90-90c3-e71955d93a44'
+   when 'Queen'
+     params[:name] = '0383dadf-2a4e-4d10-a46a-e9e041da8eb3'
+   else
+  end
+
   begin
     #setlistからXMLを取得
     song = REXML::Document.new(open("http://api.setlist.fm/rest/0.1/search/setlists?artistName=#{params[:name]}"))
-    song2 = REXML::Document.new(open("http://api.setlist.fm/rest/0.1/search/setlists?artistName=#{params[:name]}&p=2"))
+#    song2 = REXML::Document.new(open("http://api.setlist.fm/rest/0.1/search/setlists?artistName=#{params[:name]}&p=2"))
     rescue OpenURI::HTTPError,URI::InvalidURIError
     #もしsetlistから取得出来なかった場合
-      puts "no data at setlist.fm"
+      p "no data at setlist.fm"
       url = URI.escape(params[:name])
       jpsong = REXML::Document.new(open("http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=#{url}&api_key=22707255549691ea043a7771c96c7d31"))
       jpsong.elements.each('lfm/toptracks/track') do |e|
         song_array << e.elements['name'].text
       end
+      @setlist = song_array
   end
 
   #アーティストの最新ライブ動向
@@ -43,23 +53,24 @@ get '/:name' do
     song.elements.each('setlists/setlist/sets/set/song') do |e|
       song_array << e.attributes["name"]
     end
-    song2.elements.each('setlists/setlist/sets/set/song') do |e|
-      song_array << e.attributes["name"]
-    end
+#    song2.elements.each('setlists/setlist/sets/set/song') do |e|
+#      song_array << e.attributes["name"]
+#    end
     song_count = 0
     if(song.elements['setlist/setlist/sets/set/song'] != false)
       song.elements.each('setlists/setlist') do |d|
         song_count += 1
       end
     end
-    if(song2.elements['setlist/setlist/sets/set/song'] != false)
-      song2.elements.each('setlists/setlist') do |d|
-        song_count += 1
-      end
-    end
+#    if(song2.elements['setlist/setlist/sets/set/song'] != false)
+#      song2.elements.each('setlists/setlist') do |d|
+#        song_count += 1
+#      end
+#    end
   rescue NoMethodError
     puts 'NoMethod'
   end
+  p song_array
   p song_count
 
   #配列中の曲の回数をカウント
@@ -81,10 +92,9 @@ get '/:name' do
     rate = p[1].to_f/song_count.to_f
     percent = rate*100
     p[1] = percent.round(2)
-    p p[1]
   end
 
-  p count_sort.size
+  p count_sort
 
   @setlist = count_sort
 

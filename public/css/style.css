@@ -68,6 +68,7 @@ nav {
   width: 1000px;
   margin: 0px auto;
   overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.8);
 }
 #container .green {
   /*background-color: rgba(160, 212, 104, 0.8);*/
@@ -103,6 +104,14 @@ nav {
   color: #fff;
   padding: 5px 145px;
 }
+#container .ul-block .sonicmania {
+  width: 105px;
+  margin: 0 auto;
+  background-color: #F6BB42;
+  color: #fff;
+  padding: 5px 155px;
+  overflow: hidden;
+}
 #container .ul-block .tomorrowland {
   width: 112px;
   margin: 0 auto;
@@ -134,10 +143,11 @@ nav {
   -webkit-border-radius: 4px;
 }
 #container .ul-block ul li dd {
-  margin: 0px;
-  padding: 3px;
+  margin: 1px 0 0 0;
+  padding: 4px;
   color: #F5F7FA;
-  background-color: rgba(66, 74, 84, 0.8);
+  background-color: rgba(66, 74, 84, 0.9);
+  border-radius: 4px;
 }
 #container .ul-block ul li a {
   transition: opacity .25s ease-in-out;

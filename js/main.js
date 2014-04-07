@@ -34,7 +34,7 @@ function firstvideo(){
   location.hash = $('ul#video_list li:eq(0)').attr('id');
   var id = location.hash.substring(1);
   $('#'+id).addClass('current');
-  var youtubeUrl = 'http://www.youtube.com/v/'+ id +'?enablejsapi=1&playerapiid=ytplayer&color=white&showinfo=0&theme=light';
+  var youtubeUrl = 'http://www.youtube.com/v/'+ id +'?enablejsapi=1&fs=1&rel=0&playerapiid=ytplayer&color=white&showinfo=0&theme=light';
   var params = { allowScriptAccess: "always" };
   var atts = { id: "myytplayer" };
   var flashvars = {};

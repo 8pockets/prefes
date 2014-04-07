@@ -62,6 +62,7 @@ nav{
 	width: 1000px;
 	margin: 0px auto;
 	overflow: hidden;
+	background-color: rgba(255,255,255,.8);
 	.green{
 		/*background-color: rgba(160, 212, 104, 0.8);*/
 	}
@@ -95,6 +96,14 @@ nav{
 		color: #fff;
 		padding: 5px 145px;
 	}
+	.sonicmania{
+		width: 105px;
+		margin: 0 auto;
+		background-color: #F6BB42;
+		color: #fff;
+		padding: 5px 155px;
+		overflow:hidden;
+	}
 	.tomorrowland{
 		width: 112px;
 		margin: 0 auto;
@@ -125,10 +134,11 @@ nav{
 			-webkit-border-radius: 4px;
 		}
 		dd{
-			margin: 0px;
-			padding: 3px;
+			margin: 1px 0 0 0;
+			padding: 4px;
 			color: #F5F7FA;
-			background-color:rgba(66, 74, 84, 0.8);
+			background-color:rgba(66, 74, 84, 0.9);
+			border-radius: 4px;
 		}
 		a{
 			transition: opacity .25s ease-in-out;
