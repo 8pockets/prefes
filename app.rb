@@ -3,11 +3,15 @@
 
 require 'rubygems'
 require 'sinatra'
-require 'open-uri'
-#require 'uri'
+require 'sinatra/reloader'
 require 'rexml/document'
+require 'open-uri'
 #require 'google/api_client'
 #require 'trollop'
+require 'uri'
+require 'json'
+require 'net/http' 
+#http://qiita.com/awakia/items/bd8c1385115df27c15fa
 
 get '/' do
   erb :index
@@ -28,20 +32,20 @@ get '/:name' do
    else
   end
 
-  begin
+begin
     #setlistからXMLを取得
     song = REXML::Document.new(open("http://api.setlist.fm/rest/0.1/search/setlists?artistName=#{params[:name]}"))
 #    song2 = REXML::Document.new(open("http://api.setlist.fm/rest/0.1/search/setlists?artistName=#{params[:name]}&p=2"))
-    rescue OpenURI::HTTPError,URI::InvalidURIError
-    #もしsetlistから取得出来なかった場合
-      p "no data at setlist.fm"
+	#もしsetlistから取得出来なかった場合
+    rescue OpenURI::HTTPError,URI::InvalidURIError,REXML::ParseException
+      p "No Data At Setlist.fm"
       url = URI.escape(params[:name])
       jpsong = REXML::Document.new(open("http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=#{url}&api_key=22707255549691ea043a7771c96c7d31"))
       jpsong.elements.each('lfm/toptracks/track') do |e|
         song_array << e.elements['name'].text
       end
       @setlist = song_array
-  end
+end
 
   #アーティストの最新ライブ動向
   #song.elements.each('setlists/setlist/sets/set') do |d|
@@ -49,7 +53,7 @@ get '/:name' do
 
   #setlistからXMLをパース
   begin
-    song.elements.each('setlists/setlist/sets/set/song') do |e|
+  	song.elements.each('setlists/setlist/sets/set/song') do |e|
       song_array << e.attributes["name"]
     end
 #    song2.elements.each('setlists/setlist/sets/set/song') do |e|
@@ -69,8 +73,8 @@ get '/:name' do
   rescue NoMethodError
     puts 'NoMethod'
   end
-  p song_array
-  p song_count
+#  p song_array
+#  p song_count
 
   #配列中の曲の回数をカウント
   count = Hash.new(0)
@@ -93,7 +97,7 @@ get '/:name' do
     p[1] = percent.round(2)
   end
 
-  p count_sort
+ # p count_sort
 
   @setlist = count_sort
 

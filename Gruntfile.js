@@ -22,7 +22,6 @@ module.exports = function(grunt) {
         sass : {
             dev : {                        //devは任意の実行ターゲット名
                 options : {                //optionsはSassの設定
-                    style : 'expanded'
                 },
                 files   : {                //出力先css : 元のscssフォルダ
                     'public/css/style.css' : ['sass/style.scss']
