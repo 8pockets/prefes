@@ -4,13 +4,15 @@
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
-require 'rexml/document'
+#require 'rexml/document'
 require 'open-uri'
+require 'net/http'
+require 'nokogiri'
+
 #require 'google/api_client'
 #require 'trollop'
-require 'uri'
-require 'json'
-require 'net/http' 
+#require 'uri'
+#require 'json'
 #http://qiita.com/awakia/items/bd8c1385115df27c15fa
 
 get '/' do
@@ -20,31 +22,35 @@ get '/about' do
   erb :about
 end
 
-get '/:name' do
+get '/:artist' do
   song_array = []
 
   #アーティストの例外処理(mbid)
-  case params[:name]
+  case params[:artist]
    when 'Banks'
-     params[:name] = 'faa28a33-5470-4b90-90c3-e71955d93a44'
+     params[:artist] = 'faa28a33-5470-4b90-90c3-e71955d93a44'
    when 'Queen'
-     params[:name] = '0383dadf-2a4e-4d10-a46a-e9e041da8eb3'
+     params[:artist] = '0383dadf-2a4e-4d10-a46a-e9e041da8eb3'
    else
   end
 
 begin
     #setlistからXMLを取得
-    song = REXML::Document.new(open("http://api.setlist.fm/rest/0.1/search/setlists?artistName=#{params[:name]}"))
-#    song2 = REXML::Document.new(open("http://api.setlist.fm/rest/0.1/search/setlists?artistName=#{params[:name]}&p=2"))
+    uri = "http://api.setlist.fm/rest/0.1/search/setlists?artistName=#{params[:artist]}"
+    #res = Net::HTTP.get(uri)
+    song = Nokogiri::XML(open(uri))
+    #song = REXML::Document.new(open("http://api.setlist.fm/rest/0.1/search/setlists?artistName=#{params[:artist]}"))
+#    song2 = REXML::Document.new(open("http://api.setlist.fm/rest/0.1/search/setlists?artistName=#{params[:artist]}&p=2"))
 	#もしsetlistから取得出来なかった場合
-    rescue OpenURI::HTTPError,URI::InvalidURIError,REXML::ParseException
-      p "No Data At Setlist.fm"
-      url = URI.escape(params[:name])
-      jpsong = REXML::Document.new(open("http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=#{url}&api_key=22707255549691ea043a7771c96c7d31"))
-      jpsong.elements.each('lfm/toptracks/track') do |e|
-        song_array << e.elements['name'].text
-      end
-      @setlist = song_array
+    #rescue OpenURI::HTTPError,URI::InvalidURIError,REXML::ParseException
+    rescue OpenURI::HTTPError
+		p "No Data At Setlist.fm"
+		url = URI.escape(params[:artist])
+		uri = URI.parse("http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=#{url}&api_key=22707255549691ea043a7771c96c7d31")
+		res = Net::HTTP.get(uri)
+		jpsong = Nokogiri::XML(res)
+		song_array = jpsong.xpath("/lfm/toptracks/track").map{|e| e.content}
+		@setlist = song_array
 end
 
   #アーティストの最新ライブ動向
@@ -53,18 +59,21 @@ end
 
   #setlistからXMLをパース
   begin
-  	song.elements.each('setlists/setlist/sets/set/song') do |e|
-      song_array << e.attributes["name"]
-    end
+  p song.xpath('//setlist')
+  song_array = song.xpath("//song/@name").map{|e| e.content}
+  p song_array
+#  	song.elements.each('setlists/setlist/sets/set/song') do |e|
+#      song_array << e.attributes["name"].text
+#    end
 #    song2.elements.each('setlists/setlist/sets/set/song') do |e|
 #      song_array << e.attributes["name"]
 #    end
-    song_count = 0
-    if(song.elements['setlist/setlist/sets/set/song'] != false)
-      song.elements.each('setlists/setlist') do |d|
-        song_count += 1
-      end
-    end
+#    song_count = 0
+#    if(song.elements['setlist/setlist/sets/set/song'] != false)
+#      song.elements.each('setlists/setlist') do |d|
+#        song_count += 1
+#      end
+#    end
 #    if(song2.elements['setlist/setlist/sets/set/song'] != false)
 #      song2.elements.each('setlists/setlist') do |d|
 #        song_count += 1
@@ -73,10 +82,8 @@ end
   rescue NoMethodError
     puts 'NoMethod'
   end
-#  p song_array
-#  p song_count
 
-  #配列中の曲の回数をカウント
+  #配列中の曲の回数順にソート
   count = Hash.new(0)
   song_array.each do |c|
     count[c] += 1
@@ -91,13 +98,14 @@ end
   end
 
   #曲のパーセント
+  song_count = song_array.count
   count_sort.each do |p|
     rate = p[1].to_f/song_count.to_f
     percent = rate*100
     p[1] = percent.round(2)
   end
 
- # p count_sort
+# p count_sort
 
   @setlist = count_sort
 
@@ -140,11 +148,11 @@ end
 
 #  #曲のYouTubeIdを取得する
 #  begin
-# # topsong = "#{params[:name]} "+ count_sort[0][0]
+# # topsong = "#{params[:artist]} "+ count_sort[0][0]
 # # @data = main(topsong)
 #
 #  count_sort[0..4].each do |s|
-#    othersong = "#{params[:name]} "+ s[0]
+#    othersong = "#{params[:artist]} "+ s[0]
 #    s << main(othersong)
 #    p s #ここで曲ランキン表示
 #  end
