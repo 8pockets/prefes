@@ -6,7 +6,6 @@ RUN apt-get update && \
 
 # ENV
 ENV APP_HOME /prefes
-ENV HOME /root
 
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
@@ -20,4 +19,4 @@ RUN bundle install
 
 # Start server
 EXPOSE 4567
-CMD ["foreman","start","-d","/root/sinatra"]
+CMD ["foreman","start","-d","/prefes", "-f", "/prefes/Procfile", "-p", "4567"]
