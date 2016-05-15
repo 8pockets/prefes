@@ -43,16 +43,16 @@ class App < Sinatra::Base
       song = Nokogiri::XML(open(uri))
       #song = REXML::Document.new(open("http://api.setlist.fm/rest/0.1/search/setlists?artistName=#{params[:artist]}"))
   #    song2 = REXML::Document.new(open("http://api.setlist.fm/rest/0.1/search/setlists?artistName=#{params[:artist]}&p=2"))
-  	#もしsetlistから取得出来なかった場合
+      #もしsetlistから取得出来なかった場合
       #rescue OpenURI::HTTPError,URI::InvalidURIError,REXML::ParseException
       rescue OpenURI::HTTPError
-  		p "No Data At Setlist.fm"
-  		url = URI.escape(params[:artist])
-  		uri = URI.parse("http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=#{url}&api_key=22707255549691ea043a7771c96c7d31")
-  		res = Net::HTTP.get(uri)
-  		jpsong = Nokogiri::XML(res)
-  		song_array = jpsong.xpath("/lfm/toptracks/track").map{|e| e.content}
-  		@setlist = song_array
+      p "No Data At Setlist.fm"
+      url = URI.escape(params[:artist])
+      uri = URI.parse("http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=#{url}&api_key=22707255549691ea043a7771c96c7d31")
+      res = Net::HTTP.get(uri)
+      jpsong = Nokogiri::XML(res)
+      song_array = jpsong.xpath("/lfm/toptracks/track").map{|e| e.content}
+      @setlist = song_array
   end
 
     #アーティストの最新ライブ動向
@@ -64,7 +64,7 @@ class App < Sinatra::Base
     p song.xpath('//setlist')
     song_array = song.xpath("//song/@name").map{|e| e.content}
     p song_array
-  #  	song.elements.each('setlists/setlist/sets/set/song') do |e|
+  #    song.elements.each('setlists/setlist/sets/set/song') do |e|
   #      song_array << e.attributes["name"].text
   #    end
   #    song2.elements.each('setlists/setlist/sets/set/song') do |e|
